@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8">
+  <title>Creating Links</title>
+  </head>
+  
+  <body>
+    <h1>Linking to pages within your site</h1>
+    <h2>About</h2>
+    
+    <!--Link went up one directory out of current folder-->
+    <p>Link to the links.htm page, up one directory</p>
+    
+    <!--Link went back into directory folder-->
+    <p>Link to the resources.htm page, down one directory</p>
+  </body>
+
+</html>
