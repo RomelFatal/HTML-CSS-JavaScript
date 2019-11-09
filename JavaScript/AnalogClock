@@ -108,7 +108,7 @@
 #minute,
 #second {
     transform-origin: 300px 300px;
-    transition: transform .5s ease-in-out;
+    /* transition: transform .5s ease-in-out; */
 }
 
 
@@ -119,23 +119,32 @@ const HOURHAND = document.querySelector("#hour");
 const MINUTEHAND = document.querySelector("#minute");
 const SECONDHAND = document.querySelector("#second");
 
-/* Automatically load/refresh clock to keep time update 
-using the SetInterval method for a function */
+var date = new Date();
+console.log(date);
+let hr = date.getHours();
+let min = date.getMinutes();
+let sec = date.getSeconds();
+console.log("Hour: " + hr + " Minute: " + min + " Second: " + sec);
+
+let hrPosition = (hr * 360 / 12) + (min * (360 / 60) / 12);
+let minPosition = (min * 360 / 60) + (sec * (360 / 60) / 60);
+let secPosition = (sec * 360 / 60);
+
 function runTheClock() {
- var date = new Date();
- console.log(date);
- let hr = date.getHours();
- let min = date.getMinutes();
- let sec = date.getSeconds();
- console.log("Hour: " + hr + " Minute: " + min + " Second: " + sec);
+  /* Getting the degrees on the circle to position the clock hand on the face of the circle */
 
- let hrPosition = (hr * 360 / 12) + (min * (360 / 60) / 12);
- let minPosition = (min * 360 / 60) + (sec * (360 / 60) / 60);
- let secPosition = sec * 360 / 60;
+  /* Display correct value of the hour hand, number of degree converted to hour and number of second in an hour */
+  hrPosition = hrPosition + ((360 / 12) / 3600);
 
- HOURHAND.style.transform = "rotate(" + hrPosition + "deg)";
- MINUTEHAND.style.transform = "rotate(" + minPosition + "deg)";
- SECONDHAND.style.transform = "rotate(" + secPosition + "deg)";
+  /* Display correct value of the minute hand, number of degree converted to minute and number of second in n minute */
+  minPosition = minPosition + ((1 / 60) * 6);
+  
+  /* Get second hand position and add an additional degree to display the correct second value */
+  secPosition = secPosition + (360 / 60);
+
+  HOURHAND.style.transform = "rotate(" + hrPosition + "deg)";
+  MINUTEHAND.style.transform = "rotate(" + minPosition + "deg)";
+  SECONDHAND.style.transform = "rotate(" + secPosition + "deg)";
 }
 
 var interval = setInterval(runTheClock, 1000);
